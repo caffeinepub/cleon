@@ -1,0 +1,329 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* CLEON Dark Navy Theme - OKLCH raw L C H values */
+    --background: 0.105 0.022 255;
+    --foreground: 0.95 0.01 255;
+    --card: 0.13 0.025 255;
+    --card-foreground: 0.95 0.01 255;
+    --popover: 0.13 0.025 255;
+    --popover-foreground: 0.95 0.01 255;
+    --primary: 0.84 0.155 85;
+    --primary-foreground: 0.12 0.022 255;
+    --secondary: 0.175 0.03 255;
+    --secondary-foreground: 0.85 0.01 255;
+    --muted: 0.175 0.03 255;
+    --muted-foreground: 0.6 0.02 255;
+    --accent: 0.72 0.19 210;
+    --accent-foreground: 0.1 0.022 255;
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.95 0 0;
+    --border: 0.22 0.03 255;
+    --input: 0.2 0.03 255;
+    --ring: 0.84 0.155 85;
+
+    /* Gold accent */
+    --gold: 0.84 0.155 85;
+    --gold-dim: 0.7 0.13 80;
+    --gold-bright: 0.92 0.18 90;
+    /* Cyan accent */
+    --cyan: 0.72 0.19 210;
+    --cyan-dim: 0.58 0.14 210;
+    /* Red/coral for sell signals */
+    --sell-red: 0.65 0.22 25;
+    /* Navy shades */
+    --navy-deep: 0.08 0.02 255;
+    --navy-mid: 0.12 0.025 255;
+    --navy-light: 0.175 0.03 255;
+    --navy-border: 0.22 0.04 255;
+
+    --chart-1: 0.84 0.155 85;
+    --chart-2: 0.72 0.19 210;
+    --chart-3: 0.65 0.22 25;
+    --chart-4: 0.628 0.265 303.9;
+    --chart-5: 0.645 0.246 16.439;
+
+    --sidebar: 0.12 0.025 255;
+    --sidebar-foreground: 0.95 0.01 255;
+    --sidebar-primary: 0.84 0.155 85;
+    --sidebar-primary-foreground: 0.12 0.022 255;
+    --sidebar-accent: 0.175 0.03 255;
+    --sidebar-accent-foreground: 0.85 0.01 255;
+    --sidebar-border: 0.22 0.03 255;
+    --sidebar-ring: 0.84 0.155 85;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-color: oklch(var(--background));
+    color: oklch(var(--foreground));
+    font-family: "Outfit", "General Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", "Cabinet Grotesk", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(var(--navy-deep));
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--navy-border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--gold-dim));
+}
+
+/* ── Gold glow utilities ── */
+@layer utilities {
+  .glow-gold {
+    box-shadow: 0 0 20px oklch(var(--gold) / 0.45), 0 0 50px oklch(var(--gold) / 0.2), 0 0 80px oklch(var(--gold) / 0.08);
+  }
+  .glow-gold-sm {
+    box-shadow: 0 0 12px oklch(var(--gold) / 0.4), 0 0 24px oklch(var(--gold) / 0.18);
+  }
+  .glow-gold-text {
+    text-shadow: 0 0 30px oklch(var(--gold) / 0.6), 0 0 60px oklch(var(--gold) / 0.25);
+  }
+  .glow-cyan {
+    box-shadow: 0 0 20px oklch(var(--cyan) / 0.35), 0 0 40px oklch(var(--cyan) / 0.15);
+  }
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+  .text-gold-dim {
+    color: oklch(var(--gold-dim));
+  }
+  .text-cyan {
+    color: oklch(var(--cyan));
+  }
+  .text-sell-red {
+    color: oklch(var(--sell-red));
+  }
+  .bg-gold {
+    background-color: oklch(var(--gold));
+  }
+  .bg-cyan {
+    background-color: oklch(var(--cyan));
+  }
+  .bg-navy-deep {
+    background-color: oklch(var(--navy-deep));
+  }
+  .bg-navy-mid {
+    background-color: oklch(var(--navy-mid));
+  }
+  .bg-navy-light {
+    background-color: oklch(var(--navy-light));
+  }
+  .border-gold {
+    border-color: oklch(var(--gold));
+  }
+  .border-cyan {
+    border-color: oklch(var(--cyan));
+  }
+  .border-navy {
+    border-color: oklch(var(--navy-border));
+  }
+  .grid-pattern {
+    background-image:
+      linear-gradient(oklch(var(--navy-border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(var(--navy-border) / 0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* ── Candlestick animation ── */
+@keyframes candle-grow {
+  0% { transform: scaleY(0); opacity: 0; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+@keyframes float-card {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse-gold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-float {
+  animation: float-card 4s ease-in-out infinite;
+}
+.animate-float-delay {
+  animation: float-card 4s ease-in-out infinite 1s;
+}
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+.ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+/* ── Hero gradient overlay ── */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 90% 70% at 75% 45%,
+      oklch(var(--cyan) / 0.1) 0%,
+      oklch(var(--gold) / 0.05) 45%,
+      transparent 70%),
+    radial-gradient(ellipse 60% 50% at 15% 65%,
+      oklch(var(--gold) / 0.09) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 90%,
+      oklch(var(--cyan) / 0.04) 0%,
+      transparent 60%);
+}
+
+/* ── PRO card premium treatment ── */
+.pro-card-bg {
+  background:
+    linear-gradient(
+      160deg,
+      oklch(0.17 0.04 80 / 0.9) 0%,
+      oklch(0.14 0.03 255 / 0.95) 50%,
+      oklch(0.13 0.025 255 / 1) 100%
+    );
+}
+.pro-card-glow {
+  box-shadow:
+    0 0 0 1px oklch(var(--gold) / 0.6),
+    0 0 30px oklch(var(--gold) / 0.25),
+    0 0 70px oklch(var(--gold) / 0.1),
+    0 20px 60px oklch(0 0 0 / 0.5);
+}
+
+/* ── Card inner-light effect ── */
+.card-inner-light {
+  position: relative;
+}
+.card-inner-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 0.025) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Stat ring ── */
+.stat-ring {
+  box-shadow:
+    0 0 0 1px oklch(var(--gold) / 0.12),
+    0 0 24px oklch(var(--gold) / 0.06);
+}
+
+/* ── Shimmer on badge ── */
+@keyframes shimmer-slide {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-badge {
+  background: linear-gradient(
+    90deg,
+    oklch(var(--gold)) 0%,
+    oklch(var(--gold-bright)) 40%,
+    oklch(0.97 0.1 90) 50%,
+    oklch(var(--gold-bright)) 60%,
+    oklch(var(--gold)) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer-slide 3s linear infinite;
+}
+
+/* ── CLEON Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  white-space: nowrap;
+  color: oklch(var(--foreground));
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.logo span {
+  color: oklch(var(--gold));
+}
+
+.pulse-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 24px;
+}
+
+.pulse-wave span {
+  display: inline-block;
+  width: 3px;
+  border-radius: 2px;
+  background: oklch(var(--gold));
+  animation: none;
+  opacity: 0.3;
+}
+
+.pulse-wave.on span {
+  animation: pulse-bar 1.4s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes pulse-bar {
+  0%, 100% { transform: scaleY(0.35); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* ── Noise texture overlay ── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
